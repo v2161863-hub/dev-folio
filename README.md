@@ -6,7 +6,8 @@ Dev-Folio is a premium responsive developer portfolio landing page built for an 
 ## Features
 
 - Sticky responsive Bootstrap navbar with active link highlighting
-- Hero section with typing animation, CTA buttons, particles, and social links
+- Section-aware accent colors and subtle background tints for Home, Skills, and Contact
+- Hero section with typing animation, CTA buttons, particles, social links, and profile photo upload/update/removal
 - Six Bootstrap skill cards with icons, progress bars, glow, and tilt effects
 - Contact section with floating labels, real-time validation, error states, success alert, contact cards, and map placeholder
 - Footer with quick links, social icons, copyright text, and scroll-to-top button
