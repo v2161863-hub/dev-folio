@@ -13,6 +13,8 @@ const successAlert = document.getElementById("formSuccess");
 const photoInput = document.getElementById("profilePhotoInput");
 const profilePreview = document.getElementById("profilePreview");
 const photoFrame = document.getElementById("photoFrame");
+const uploadPhotoBtn = document.getElementById("uploadPhotoBtn");
+const updatePhotoBtn = document.getElementById("updatePhotoBtn");
 const removePhotoBtn = document.getElementById("removePhotoBtn");
 const uploadHint = document.getElementById("uploadHint");
 const startProjectBtn = document.getElementById("startProjectBtn");
@@ -132,6 +134,8 @@ function updateActiveLink() {
   navLinks.forEach((link) => {
     link.classList.toggle("active", link.getAttribute("href") === `#${currentSection}`);
   });
+
+  document.body.dataset.activeSection = currentSection;
 }
 
 window.addEventListener("scroll", () => {
@@ -148,6 +152,15 @@ navLinks.forEach((link) => {
 
     if (openMenu && window.bootstrap) {
       bootstrap.Collapse.getOrCreateInstance(openMenu).hide();
+    }
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    const sectionId = link.getAttribute("href").slice(1);
+    if (document.getElementById(sectionId)?.matches("main section[id]")) {
+      document.body.dataset.activeSection = sectionId;
     }
   });
 });
@@ -185,39 +198,76 @@ document.querySelectorAll("[data-tilt]").forEach((card) => {
   });
 });
 
-if (photoInput && profilePreview && photoFrame) {
+if (photoInput && profilePreview && photoFrame && uploadPhotoBtn && updatePhotoBtn && removePhotoBtn && uploadHint) {
+  let currentPhotoUrl = null;
+  let photoSelectionId = 0;
+
+  function openPhotoPicker() {
+    uploadHint.textContent = "Choose an image file to upload.";
+    uploadHint.classList.remove("error");
+    photoInput.click();
+  }
+
+  uploadPhotoBtn.addEventListener("click", openPhotoPicker);
+  updatePhotoBtn.addEventListener("click", openPhotoPicker);
+
   photoInput.addEventListener("change", () => {
     const selectedPhoto = photoInput.files[0];
+    photoInput.value = "";
 
     if (!selectedPhoto) return;
 
     if (!selectedPhoto.type.startsWith("image/")) {
-      uploadHint.textContent = "Please upload a valid image file.";
+      uploadHint.textContent = "That file is not a supported image. Please choose an image.";
       uploadHint.classList.add("error");
-      photoInput.value = "";
       return;
     }
 
-    const reader = new FileReader();
+    const selectionId = ++photoSelectionId;
+    const photoUrl = URL.createObjectURL(selectedPhoto);
+    const imageCheck = new Image();
 
-    reader.addEventListener("load", () => {
-      profilePreview.src = reader.result;
+    imageCheck.addEventListener("load", () => {
+      if (selectionId !== photoSelectionId) {
+        URL.revokeObjectURL(photoUrl);
+        return;
+      }
+
+      const previousPhotoUrl = currentPhotoUrl;
+      currentPhotoUrl = photoUrl;
+      profilePreview.src = photoUrl;
       photoFrame.classList.add("has-image");
-      removePhotoBtn.classList.remove("d-none");
+      removePhotoBtn.disabled = false;
       uploadHint.textContent = selectedPhoto.name;
       uploadHint.classList.remove("error");
+
+      if (previousPhotoUrl) URL.revokeObjectURL(previousPhotoUrl);
     });
 
-    reader.readAsDataURL(selectedPhoto);
+    imageCheck.addEventListener("error", () => {
+      URL.revokeObjectURL(photoUrl);
+      if (selectionId !== photoSelectionId) return;
+
+      uploadHint.textContent = "The selected file could not be read as an image. Choose another image.";
+      uploadHint.classList.add("error");
+    });
+
+    imageCheck.src = photoUrl;
   });
 
   removePhotoBtn.addEventListener("click", () => {
+    photoSelectionId += 1;
     profilePreview.removeAttribute("src");
     photoFrame.classList.remove("has-image");
-    removePhotoBtn.classList.add("d-none");
-    photoInput.value = "";
+    removePhotoBtn.disabled = true;
+    if (currentPhotoUrl) URL.revokeObjectURL(currentPhotoUrl);
+    currentPhotoUrl = null;
     uploadHint.textContent = "Choose a JPG, PNG, or WebP image.";
     uploadHint.classList.remove("error");
+  });
+
+  window.addEventListener("beforeunload", () => {
+    if (currentPhotoUrl) URL.revokeObjectURL(currentPhotoUrl);
   });
 }
 
