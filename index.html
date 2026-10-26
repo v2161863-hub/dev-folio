@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dev-Folio is a modern responsive developer portfolio landing page built with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript.">
+  <meta name="keywords" content="developer portfolio, HTML5, CSS3, Bootstrap 5, JavaScript, responsive website">
+  <meta name="author" content="Dev-Folio">
+  <title>Dev-Folio | Developer Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loader" id="loader" aria-label="Loading website">
+    <div class="loader-ring"></div>
+    <span>Dev-Folio</span>
+  </div>
+
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <nav class="navbar navbar-expand-lg fixed-top dev-navbar" id="mainNavbar" aria-label="Primary navigation">
+    <div class="container">
+      <a class="navbar-brand" href="#home" aria-label="Dev-Folio home">
+        <span class="brand-mark">D</span>
+        <span>Dev-Folio</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm btn-primary dev-nav-cta" href="#contact">Hire Me</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero-section section-band" id="home">
+      <div id="particles-js" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+
+      <div class="container position-relative">
+        <div class="row align-items-center min-vh-100 g-5 py-5">
+          <div class="col-lg-7 pt-5" data-aos="fade-up">
+            <span class="eyebrow">Available for internships and freelance builds</span>
+            <h1 class="hero-title mt-4">Hi, I'm Lasya, a frontend developer crafting premium web experiences.</h1>
+            <p class="hero-subtitle mt-4">
+              I build fast, responsive interfaces with
+              <span class="typing-text" id="typingText" aria-live="polite"></span>
+              <span class="typing-caret" aria-hidden="true"></span>
+            </p>
+            <div class="hero-actions d-flex flex-column flex-sm-row gap-3 mt-5">
+              <a class="btn btn-primary btn-lg animated-btn" href="#contact" id="startProjectBtn">
+                <i class="bi bi-send-fill" aria-hidden="true"></i>
+                Start Project
+              </a>
+              <a class="btn btn-outline-light btn-lg animated-btn" href="#skills">
+                <i class="bi bi-stars" aria-hidden="true"></i>
+                Explore Skills
+              </a>
+            </div>
+            <div class="social-links mt-5" aria-label="Social links">
+              <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+              <a href="mailto:hello@devfolio.dev" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="150">
+            <div class="profile-visual tilt-card" data-tilt>
+              <div class="profile-card glass-card">
+                <div class="profile-avatar photo-placeholder">
+                  <div class="photo-frame" id="photoFrame" role="img" aria-label="Profile photo preview for Lasya">
+                    <img class="profile-preview" id="profilePreview" alt="Uploaded profile photo preview">
+                    <i class="bi bi-person-fill" aria-hidden="true"></i>
+                  </div>
+                  <span>Lasya</span>
+                  <div class="photo-upload-actions">
+                    <label class="btn btn-sm btn-light upload-photo-btn" for="profilePhotoInput">
+                      <i class="bi bi-upload" aria-hidden="true"></i>
+                      Upload Photo
+                    </label>
+                    <button class="btn btn-sm btn-outline-light d-none" id="removePhotoBtn" type="button">
+                      <i class="bi bi-x-circle" aria-hidden="true"></i>
+                      Remove
+                    </button>
+                  </div>
+                  <input class="visually-hidden" type="file" id="profilePhotoInput" accept="image/*" aria-label="Upload profile photo">
+                  <small class="photo-upload-hint" id="uploadHint">Choose a JPG, PNG, or WebP image.</small>
+                </div>
+                <div class="code-window">
+                  <div class="window-dots" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <pre><code>const developer = {
+  stack: "HTML CSS JS",
+  focus: "UI Engineering",
+  status: "Building"
+};</code></pre>
+                </div>
+                <div class="floating-badge badge-top">
+                  <i class="bi bi-lightning-charge-fill"></i>
+                  98 Lighthouse
+                </div>
+                <div class="floating-badge badge-bottom">
+                  <i class="bi bi-gem"></i>
+                  Premium UI
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-section section-band" id="skills">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-lg-8" data-aos="fade-up">
+            <span class="eyebrow">Technical toolkit</span>
+            <h2 class="section-title mt-3">Skills that turn ideas into polished products.</h2>
+            <p class="section-copy mt-3">A focused stack for building accessible, responsive, and production-ready digital experiences.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <article class="card skill-card h-100 tilt-card" data-tilt>
+              <div class="card-body">
+                <div class="skill-icon html-icon"><i class="bi bi-filetype-html"></i></div>
+                <h3 class="card-title">HTML5</h3>
+                <p class="card-text">Semantic, accessible structure built for SEO, readability, and clean content hierarchy.</p>
+                <div class="skill-meta"><span>Expertise</span><strong>95%</strong></div>
+                <div class="progress" role="progressbar" aria-label="HTML5 skill level" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 95%"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="75">
+            <article class="card skill-card h-100 tilt-card" data-tilt>
+              <div class="card-body">
+                <div class="skill-icon css-icon"><i class="bi bi-filetype-css"></i></div>
+                <h3 class="card-title">CSS3</h3>
+                <p class="card-text">Modern layouts, responsive systems, animations, glass effects, and polished micro-interactions.</p>
+                <div class="skill-meta"><span>Expertise</span><strong>92%</strong></div>
+                <div class="progress" role="progressbar" aria-label="CSS3 skill level" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 92%"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <article class="card skill-card h-100 tilt-card" data-tilt>
+              <div class="card-body">
+                <div class="skill-icon bootstrap-icon"><i class="bi bi-bootstrap-fill"></i></div>
+                <h3 class="card-title">Bootstrap</h3>
+                <p class="card-text">Mobile-first grids, components, cards, buttons, and utility classes for rapid delivery.</p>
+                <div class="skill-meta"><span>Expertise</span><strong>90%</strong></div>
+                <div class="progress" role="progressbar" aria-label="Bootstrap skill level" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 90%"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <article class="card skill-card h-100 tilt-card" data-tilt>
+              <div class="card-body">
+                <div class="skill-icon js-icon"><i class="bi bi-filetype-js"></i></div>
+                <h3 class="card-title">JavaScript</h3>
+                <p class="card-text">Interactive UI behavior, form validation, dynamic states, and smooth user flows.</p>
+                <div class="skill-meta"><span>Expertise</span><strong>88%</strong></div>
+                <div class="progress" role="progressbar" aria-label="JavaScript skill level" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 88%"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="75">
+            <article class="card skill-card h-100 tilt-card" data-tilt>
+              <div class="card-body">
+                <div class="skill-icon python-icon"><i class="bi bi-code-square"></i></div>
+                <h3 class="card-title">Python</h3>
+                <p class="card-text">Automation, backend logic, data processing, and clean problem-solving fundamentals.</p>
+                <div class="skill-meta"><span>Expertise</span><strong>82%</strong></div>
+                <div class="progress" role="progressbar" aria-label="Python skill level" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 82%"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <article class="card skill-card h-100 tilt-card" data-tilt>
+              <div class="card-body">
+                <div class="skill-icon sql-icon"><i class="bi bi-database-fill"></i></div>
+                <h3 class="card-title">SQL</h3>
+                <p class="card-text">Reliable queries, relational data design, reporting, and structured application data.</p>
+                <div class="skill-meta"><span>Expertise</span><strong>80%</strong></div>
+                <div class="progress" role="progressbar" aria-label="SQL skill level" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 80%"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section section-band" id="contact">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-lg-8" data-aos="fade-up">
+            <span class="eyebrow">Let's collaborate</span>
+            <h2 class="section-title mt-3">Have a project in mind?</h2>
+            <p class="section-copy mt-3">Send a message and get a clean, fast, professional response path.</p>
+          </div>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-5" data-aos="fade-right">
+            <div class="contact-panel glass-card h-100">
+              <div class="contact-card">
+                <i class="bi bi-envelope-paper-fill"></i>
+                <div>
+                  <h3>Email</h3>
+                  <p>hello@devfolio.dev</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <i class="bi bi-geo-alt-fill"></i>
+                <div>
+                  <h3>Location</h3>
+                  <p>Remote-first, worldwide</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <i class="bi bi-clock-fill"></i>
+                <div>
+                  <h3>Response</h3>
+                  <p>Usually within 24 hours</p>
+                </div>
+              </div>
+
+              <div class="map-placeholder" role="img" aria-label="Abstract map placeholder">
+                <div class="map-pin"><i class="bi bi-pin-map-fill"></i></div>
+                <span>Global Remote Studio</span>
+              </div>
+
+              <div class="social-links contact-social" aria-label="Contact social links">
+                <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7" data-aos="fade-left">
+            <form class="contact-form glass-card" id="contactForm" novalidate>
+              <div class="alert success-alert d-none" id="formSuccess" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                Message validated successfully. Thank you for reaching out!
+              </div>
+
+              <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Your name" autocomplete="name" aria-describedby="nameError">
+                <label for="name">Your name</label>
+                <small class="error-message" id="nameError"></small>
+              </div>
+
+              <div class="form-floating mb-4">
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" autocomplete="email" aria-describedby="emailError">
+                <label for="email">Email address</label>
+                <small class="error-message" id="emailError"></small>
+              </div>
+
+              <div class="form-floating mb-4">
+                <textarea class="form-control" id="message" name="message" placeholder="Tell me about your project" aria-describedby="messageError"></textarea>
+                <label for="message">Project message</label>
+                <small class="error-message" id="messageError"></small>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-100 animated-btn">
+                <i class="bi bi-rocket-takeoff-fill" aria-hidden="true"></i>
+                Validate and Send
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row gy-4 align-items-center">
+        <div class="col-md-4">
+          <a class="footer-brand" href="#home">
+            <span class="brand-mark">D</span>
+            <span>Dev-Folio</span>
+          </a>
+          <p class="footer-copy mt-3 mb-0">&copy; <span id="currentYear"></span> Dev-Folio. All rights reserved.</p>
+        </div>
+        <div class="col-md-4">
+          <ul class="footer-links justify-content-md-center">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <div class="social-links footer-social justify-content-md-end">
+            <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTopBtn" type="button" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
