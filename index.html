@@ -90,17 +90,21 @@
                   </div>
                   <span>Lasya</span>
                   <div class="photo-upload-actions">
-                    <label class="btn btn-sm btn-light upload-photo-btn" for="profilePhotoInput">
+                    <button class="btn btn-sm upload-photo-btn" id="uploadPhotoBtn" type="button">
                       <i class="bi bi-upload" aria-hidden="true"></i>
                       Upload Photo
-                    </label>
-                    <button class="btn btn-sm btn-outline-light d-none" id="removePhotoBtn" type="button">
+                    </button>
+                    <button class="btn btn-sm btn-outline-light" id="updatePhotoBtn" type="button">
+                      <i class="bi bi-arrow-repeat" aria-hidden="true"></i>
+                      Update Photo
+                    </button>
+                    <button class="btn btn-sm btn-outline-light" id="removePhotoBtn" type="button" disabled>
                       <i class="bi bi-x-circle" aria-hidden="true"></i>
-                      Remove
+                      Remove Photo
                     </button>
                   </div>
-                  <input class="visually-hidden" type="file" id="profilePhotoInput" accept="image/*" aria-label="Upload profile photo">
-                  <small class="photo-upload-hint" id="uploadHint">Choose a JPG, PNG, or WebP image.</small>
+                  <input class="visually-hidden" type="file" id="profilePhotoInput" accept="image/*" aria-label="Choose a profile photo">
+                  <small class="photo-upload-hint" id="uploadHint" role="status" aria-live="polite">Choose a JPG, PNG, or WebP image.</small>
                 </div>
                 <div class="code-window">
                   <div class="window-dots" aria-hidden="true">
