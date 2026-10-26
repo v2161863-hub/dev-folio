@@ -278,7 +278,7 @@ svg {
 .nav-link:hover,
 .nav-link:focus,
 .nav-link.active {
-  color: var(--text);
+  color: var(--section-accent, var(--text));
 }
 
 .nav-link::after {
@@ -288,7 +288,7 @@ svg {
   bottom: 0.2rem;
   left: 0.5rem;
   height: 2px;
-  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  background: var(--section-accent, var(--cyan));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition);
@@ -307,6 +307,51 @@ svg {
   min-height: 100vh;
   padding: 0;
   overflow: hidden;
+}
+
+.section-band {
+  isolation: isolate;
+}
+
+.section-band::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 450ms ease;
+}
+
+.section-band > .container {
+  position: relative;
+}
+
+body[data-active-section="home"] {
+  --section-accent: var(--cyan);
+}
+
+body[data-active-section="skills"] {
+  --section-accent: var(--pink);
+}
+
+body[data-active-section="contact"] {
+  --section-accent: var(--lime);
+}
+
+body[data-active-section="home"] #home::before {
+  background: linear-gradient(120deg, rgba(66, 232, 245, 0.25), rgba(66, 232, 245, 0.1) 55%, transparent);
+  opacity: 1;
+}
+
+body[data-active-section="skills"] #skills::before {
+  background: linear-gradient(120deg, rgba(255, 95, 162, 0.24), rgba(255, 95, 162, 0.1) 55%, transparent);
+  opacity: 1;
+}
+
+body[data-active-section="contact"] #contact::before {
+  background: linear-gradient(120deg, rgba(198, 255, 74, 0.25), rgba(198, 255, 74, 0.1) 55%, transparent);
+  opacity: 1;
 }
 
 #particles-js {
@@ -491,14 +536,17 @@ svg {
 
 .photo-upload-actions {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 0.7rem;
 }
 
 .upload-photo-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
   color: #061018;
   font-weight: 900;
@@ -506,10 +554,19 @@ svg {
   border: 0;
 }
 
+.photo-upload-actions .btn {
+  min-width: 9rem;
+}
+
 .upload-photo-btn:hover,
 .upload-photo-btn:focus {
   color: #061018;
   background: linear-gradient(135deg, var(--lime), var(--amber));
+}
+
+.photo-upload-actions .btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .photo-upload-hint {
